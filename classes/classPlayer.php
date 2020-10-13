@@ -129,6 +129,9 @@ class Player extends Connect
        return $req;
    }
 
+   /**
+    * supprime le joueur et son contrat
+    */
    private function delete(){
        $result = $this->bdd->prepare("DELETE FROM `joueur` WHERE ID_JOUEUR = :id");
        $result->bindParam(":id", $this->id);
