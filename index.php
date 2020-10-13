@@ -18,8 +18,8 @@
     
     //appel de notre fichier class
    
-    var_dump(ROOT . DS ."classes/class.php");
-    require_once (ROOT . DS ."classes/class.php");
+    var_dump(ROOT . DS ."classes/classPlayer.php");
+    require_once (ROOT . DS ."classes/classPlayer.php");
 
     //etablissement d'une nouvelle connexion
     $dbh = new Connect;
@@ -79,7 +79,7 @@
         <input type="text" name="spays">  
         <button type="submit" name="sub" value="2">envoyer</button>
         <?php 
-            if(count($_POST) > 0){
+            if(count($_POST) > 0 && $_POST['sub'] == 2){
                 $poster->varDump($poster->poster( $_POST["snom"],$_POST["sprenom"],$_POST["spays"]));
             }
         ?>
