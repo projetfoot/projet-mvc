@@ -69,11 +69,4 @@ class Contrat extends Connect
            $this->update();
         }
     }
-
-    public function varDump($variable)
-   {
-       echo '<pre style=background-color:#333' . ';width:50%' . ';color:#fff>' . print_r($variable, true) . '</pre>';
-   }
-
-   
 }

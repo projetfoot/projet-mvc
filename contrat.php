@@ -1,6 +1,6 @@
 <?php 
 
-    define('ROOT', __DIR__);
+    define('ROOT', dirname(__DIR__));
     define('DS', DIRECTORY_SEPARATOR);
 
     $id = filter_input(INPUT_POST, 'id');
@@ -10,8 +10,8 @@
 
     
 
-    require_once (ROOT . DS .'classContrat.php');
-    var_dump(ROOT . DS .'classContrat.php');
+    require_once (ROOT . DS .'classes/classContrat.php');
+    var_dump(ROOT . DS .'classes/classContrat.php');
 
     //si la page compte au moin un post la condition s'execute
     if(count($_POST) > 0){
