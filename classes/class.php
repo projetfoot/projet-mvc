@@ -134,13 +134,12 @@ class Player extends Connect
      * @param string
      * @return array
      */
-    public function poster($id, $snom, $sprenom, $spays){
+    public function poster( $snom, $sprenom, $spays){
         $sql = "SELECT * FROM `joueur` 
                 INNER JOIN pays 
                 on joueur.ID_PAYS = pays.ID_PAYS 
                 WHERE NOM_JOUEUR like :nom 
                 AND PRENOM_JOUEUR like :prenom
-                AND ID_JOUEUR = :id
                 AND (pays.ID_PAYS like :pays 
                 OR pays.ACRO_PAYS like :pays 
                 OR pays.NOM_PAYS like :pays)";
@@ -154,7 +153,6 @@ class Player extends Connect
 
        $result->bindParam(":nom", $snom);
        $result->bindParam(":prenom", $sprenom);
-       $result->bindParam(":id", $id);
        $result->bindParam(":pays", $spays);
 
        $result->execute(); 
@@ -169,6 +167,11 @@ class Player extends Connect
        $result->bindParam(":id", $this->id);
        $req = $result->execute();
        echo "joueur supprimé";
+   }
+
+   public function varDump($variable)
+   {
+       echo '<pre style=background-color:#333' . ';width:50%' . ';color:#fff>' . print_r($variable, true) . '</pre>';
    }
 }
 

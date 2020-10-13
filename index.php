@@ -11,15 +11,16 @@
     $date = filter_input(INPUT_POST,'date');
 
     //varible pour la recherche 
-    $sid = filter_input(INPUT_POST,'sid');
     $snom = filter_input(INPUT_POST,'snom');
     $sprenom = filter_input(INPUT_POST,'sprenom');
     $spays = filter_input(INPUT_POST,'spays');
 
     
     //appel de notre fichier class
-    require (ROOT . DS . "class.php");
-    var_dump(ROOT . DS ."class.php");
+   
+    var_dump(ROOT . DS ."classes/class.php");
+    require_once (ROOT . DS ."classes/class.php");
+
     //etablissement d'une nouvelle connexion
     $dbh = new Connect;
 
@@ -34,13 +35,7 @@
 
         if($_POST['sub'] == 2){
             $poster = new Player(); 
-        }
-
-        if($_POST["suppr"] == 1){
-        $delete = new Player(); 
-        }
-
-        
+        } 
     }
     //si $dbh est un objet on echo reussite
     if($dbh){
@@ -76,8 +71,6 @@
 
     <h2>recherchez un joueur</h2>
     <form  method="post">
-        <label for="sid">id</label>
-        <input type="text" name="sid">
         <label for="nom">nom</label>
         <input type="text" name="snom">
         <label for="prenom">prenom</label>
@@ -85,10 +78,9 @@
         <label for="pays">pays</label>
         <input type="text" name="spays">  
         <button type="submit" name="sub" value="2">envoyer</button>
-        <button type="submit"  name="suppr" value="1">supprimer</button>
         <?php 
             if(count($_POST) > 0){
-                $poster->varDump($poster->poster($_POST["sid"], $_POST["snom"],$_POST["sprenom"],$_POST["spays"]));
+                $poster->varDump($poster->poster( $_POST["snom"],$_POST["sprenom"],$_POST["spays"]));
             }
         ?>
     </form>
