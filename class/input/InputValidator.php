@@ -9,8 +9,13 @@ class InputValidator
      * Check if value name is conform else return false
      * @param string $name It's input value
      */
-    public function name(string $name) : bool
+    public function name(string $name = null) : bool
     {
+        if($name === null)
+        {
+            return '' ;
+        } 
+
         $regex = "/^[a-z]*$/i";
 
         if(!preg_match( $regex, $name) )

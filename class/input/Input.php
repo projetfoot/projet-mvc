@@ -43,12 +43,13 @@ class Input
      */
     private function clean()
     {   
-        $name = $this->post['mail'];
+        $name = $this->post['name'] ?? null;
+        $mail = $this->post['mail'];
         $pass = $this->post['password'];
         $confirmPass = $this->post['confirmPass'];
 
         $error = [];
-        
+        $error['name'] = $this->validator->name($name);
         $error['mail'] = filter_var($name, FILTER_VALIDATE_EMAIL);
         $error['password'] = $this->validator->password($pass);
         $error['equal'] = $pass === $confirmPass ? true : false;

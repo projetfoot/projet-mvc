@@ -16,7 +16,6 @@ class UserModel extends Model
             ";
         
         $query = $this->pdo->prepare($sql);
-        var_dump($user);
 
         return $query->execute([
             'nom_user' => $user->getName(),
@@ -24,5 +23,18 @@ class UserModel extends Model
             'password_user' => $user->getPassword(),
             'niveau_de_droit' => $user->getLawLevel(),
         ]);
+    }
+
+    public function findName($id) : array
+    {
+        $sql = "SELECT nom_user FROM user WHERE id_user = :id_user";
+
+        $query = $this->pdo->prepare($sql);
+
+        $query->execute([
+            ":id_user" => $id
+        ]);
+
+        return $query->fetch();
     }
 }

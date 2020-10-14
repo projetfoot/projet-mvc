@@ -6,3 +6,5 @@
     <title>Document</title>
 </head>
 <body>
+<?php require_once ROOT .'partials/nav.php'; ?> 
+
