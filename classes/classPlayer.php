@@ -16,8 +16,7 @@ class Player extends Connect
     * creation d'un constructor pour mon nouveau joueur 
     * @param string
     */
-    public function __construct( $i='', string $c='', string $n='', string $s='', string $b=''){
-        $this->id=$i;
+    public function __construct(string $c='', string $n='', string $s='', string $b=''){
         $this->country=$c;
         $this->name=$n;
         $this->surname=$s;
@@ -31,7 +30,7 @@ class Player extends Connect
     */
     public function checkInBdd(string $post){
         $result = $this->bdd->prepare(
-            "SELECT ID_JOUEUR FROM `joueur` "
+            "SELECT NOM_JOUEUR, PRENOM_JOUEUR FROM joueur"
         );
         $result->execute();
         $req = $result->fetchAll;
@@ -44,10 +43,9 @@ class Player extends Connect
     */
     private function insert(){   
         $result = $this->bdd->prepare(
-            "INSERT INTO `joueur` (ID_JOUEUR, ID_PAYS, NOM_JOUEUR, PRENOM_JOUEUR, DATE_NAISSANCE_JOUEUR) 
-            VALUES (:id, :country, :name, :surname, :birth) "
+            "INSERT INTO `joueur` (ID_PAYS, NOM_JOUEUR, PRENOM_JOUEUR, DATE_NAISSANCE_JOUEUR) 
+            VALUES ( :country, :name, :surname, :birth) "
         );
-        $result->bindParam(':id', $this->id);
         $result->bindParam(':country', $this->country);
         $result->bindParam(':name', $this->name);
         $result->bindParam(':surname', $this->surname);
@@ -63,13 +61,12 @@ class Player extends Connect
     private function update(){  
         $result = $this->bdd->prepare(
             "UPDATE `joueur` 
-            SET ID_JOUEUR = :id, 
-            ID_PAYS = :codepays, 
+            SET ID_PAYS = :codepays, 
             NOM_JOUEUR = :nom, 
             PRENOM_JOUEUR = :prenom  
-            WHERE ID_JOUEUR  = :id"
+            WHERE NOM_JOUEUR = :nom
+            AND PRENOM_JOUEUR = :prenom "
     );
-        $result->bindParam(':id', $this->id);
         $result->bindParam(':codepays', $this->country);
         $result->bindParam(':nom', $this->name);
         $result->bindParam(':prenom', $this->surname);
@@ -82,9 +79,12 @@ class Player extends Connect
     public function write(){
         $result = $this->bdd->prepare(
             "SELECT * FROM `joueur`
-            WHERE ID_JOUEUR = :id"
+            WHERE NOM_JOUEUR = :nom
+            AND 
+            PRENOM_JOUEUR = :prenom"
         );
-        $result->bindParam(':id', $this->id);
+        $result->bindParam(':nom', $this->name);
+        $result->bindParam(':prenom', $this->surname);
         $result->execute(); 
         $req = $result->fetch();
         if(!$req){
