@@ -28,7 +28,7 @@
     if(count($_POST) > 0){
         if($_POST['sub'] == 1) {
             //ajout des paramètres dans le constructeur
-            $bdd = new Player($id,$pays,$nom,$prenom,$date);
+            $bdd = new Player($pays,$nom,$prenom,$date);
             //appel de la méthode
             $bdd->write(); 
         }
@@ -39,10 +39,6 @@
         } 
 
     }
-
-    function varDump($variable){
-       echo '<pre style=background-color:#333' . ';width:50%' . ';color:#fff>' . print_r($variable, true) . '</pre>';
-   }
 ?>
 
 
@@ -57,8 +53,6 @@
     <h1>inscrivez un joueur dans la bdd.</h1>
     <p> Si l'id entrée correspond a un joueur veillez réentrer tout les champs avec le champs que vous voulez changer </p>
     <form  method='post'>
-        <label for="id">id</label>
-        <input type="text" name="id"> 
         <label for="pays">pays</label>
         <input type="text" name="pays" >
         <label for="nom">nom</label>
@@ -80,7 +74,8 @@
         <input type="text" name="spays">  
         <button type="submit" name="sub" value="2">envoyer</button>
         <?php
-            echo display($poster);
+            //affichage des recherche
+             display($poster);
         ?>
     </form>
     <a href="contrat.php">créer un contrat</a>
