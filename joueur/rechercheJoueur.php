@@ -11,7 +11,7 @@
     
     //appel de notre fichier classPlayer
     require_once (dirname(ROOT) . DS ."classes/classPlayer.php");
-    require_once (dirname(ROOT) . DS ."lib/function.php");
+    require_once (dirname(ROOT) . DS ."libs/functions.php");
 
     //etablissement d'une nouvelle connexion
     $dbh = new Connect;
