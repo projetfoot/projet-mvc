@@ -18,7 +18,6 @@
     
     //appel de notre fichier class
    
-    var_dump(ROOT . DS ."classes/classPlayer.php");
     require_once (ROOT . DS ."classes/classPlayer.php");
 
     //etablissement d'une nouvelle connexion
@@ -35,14 +34,22 @@
 
         if($_POST['sub'] == 2){
             $poster = new Player(); 
+            if(count($_POST) > 0 && $_POST['sub'] == 2){
+                  $playerx=Player::poster( $_POST["snom"],$_POST["sprenom"],$_POST["spays"]);
+                  $id=$playerx[0]["ID_JOUEUR"];
+                  echo $id;
+            }
         } 
-    }
-    //si $dbh est un objet on echo reussite
-    if($dbh){
-        echo 'connexion reussite';
-    } else
-        echo "connexion échouée";
 
+        if($_POST["delete"] == 3 ){
+            $delete = new Player();
+            $delete->delete($id);
+        }
+    }
+
+    function varDump($variable){
+       echo '<pre style=background-color:#333' . ';width:50%' . ';color:#fff>' . print_r($variable, true) . '</pre>';
+   }
 ?>
 
 
@@ -54,7 +61,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>inscrivez un joueur dans la bdd</h1>
+    <h1>inscrivez un joueur dans la bdd.</h1>
+    <p> Si l'id entrée correspond a un joueur veillez réentrer tout les champs avec le champs que vous voulez changer </p>
     <form  method='post'>
         <label for="id">id</label>
         <input type="text" name="id"> 
@@ -71,6 +79,12 @@
 
     <h2>recherchez un joueur</h2>
     <form  method="post">
+        <input type="hidden" name="id" value="<?php 
+            if(isset($id)) {
+                echo $id;
+            }
+            varDump($playerx);
+        ?>">
         <label for="nom">nom</label>
         <input type="text" name="snom">
         <label for="prenom">prenom</label>
@@ -78,11 +92,6 @@
         <label for="pays">pays</label>
         <input type="text" name="spays">  
         <button type="submit" name="sub" value="2">envoyer</button>
-        <?php 
-            if(count($_POST) > 0 && $_POST['sub'] == 2){
-                $poster->varDump($poster->poster( $_POST["snom"],$_POST["sprenom"],$_POST["spays"]));
-            }
-        ?>
     </form>
     <a href="contrat.php">créer un contrat</a>
 </body>

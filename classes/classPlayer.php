@@ -13,9 +13,9 @@ class Player extends Connect
     private $birth = '';
 
     /**
-     * creation d'un constructor pour mon nouveau joueur 
-     * @param string
-     */
+    * creation d'un constructor pour mon nouveau joueur 
+    * @param string
+    */
     public function __construct( $i='', string $c='', string $n='', string $s='', string $b=''){
         $this->id=$i;
         $this->country=$c;
@@ -26,9 +26,9 @@ class Player extends Connect
     }
 
     /**
-     * sort tout les matricule 
-     * @param string
-     */
+    * sort tout les matricule 
+    * @param string
+    */
     public function checkInBdd(string $post){
         $result = $this->bdd->prepare(
             "SELECT ID_JOUEUR FROM `joueur` "
@@ -39,9 +39,9 @@ class Player extends Connect
     }
 
     /**
-     * insere les données du formulaire dans la bdd
-     * @return bool
-     */
+    * insere les données du formulaire dans la bdd
+    * @return bool
+    */
     private function insert(){   
         $result = $this->bdd->prepare(
             "INSERT INTO `joueur` (ID_JOUEUR, ID_PAYS, NOM_JOUEUR, PRENOM_JOUEUR, DATE_NAISSANCE_JOUEUR) 
@@ -54,13 +54,12 @@ class Player extends Connect
         $result->bindParam(':birth', $this->birth);
 
         $req = $result->execute(); 
-        echo "on est passé par l'insert";
         return $req; 
     }
 
     /**
-     * update un joueur si le id est deja prit(il faut tout repréciser)
-     */
+    * update un joueur si le id est deja prit(il faut tout repréciser)
+    */
     private function update(){  
         $result = $this->bdd->prepare(
             "UPDATE `joueur` 
@@ -75,12 +74,11 @@ class Player extends Connect
         $result->bindParam(':nom', $this->name);
         $result->bindParam(':prenom', $this->surname);
         $req = $result->execute();
-        echo "on est passé par l'update";
     }
     
     /**
-     * en fonction du matricule rentré cette fonction renvoie soit vers l'insert si aucun matricule soit vers l'update
-     */
+    * en fonction du matricule rentré cette fonction renvoie soit vers l'insert si aucun matricule soit vers l'update
+    */
     public function write(){
         $result = $this->bdd->prepare(
             "SELECT * FROM `joueur`
@@ -97,11 +95,11 @@ class Player extends Connect
     }
 
     /**
-     * l'utilisateur rentre un nom ou un prenom ou un pays et on le trouve dans la bdd
-     * @param string
-     * @return array
-     */
-    public function poster( $snom, $sprenom, $spays){
+    * l'utilisateur rentre un nom ou un prenom ou un pays et on le trouve dans la bdd
+    * @param string
+    * @return array
+    */
+    public static function poster( $snom, $sprenom, $spays){
         $sql = "SELECT * FROM `joueur` 
                 INNER JOIN pays 
                 on joueur.ID_PAYS = pays.ID_PAYS 
@@ -111,7 +109,8 @@ class Player extends Connect
                 OR pays.ACRO_PAYS like :pays 
                 OR pays.NOM_PAYS like :pays)";
 
-       $result  = $this->bdd->prepare($sql);
+        $player1 = new Player();
+        $result  = $player1->bdd->prepare($sql);
 
        //concaténation pour le LIKE)
        $snom="%".$snom."%";
@@ -125,24 +124,19 @@ class Player extends Connect
        $result->execute(); 
 
        $req = $result->fetchAll();
-       echo 'recherche...';
+ 
        return $req;
    }
 
    /**
     * supprime le joueur et son contrat
     */
-   private function delete(){
+   public function delete($id){
        $result = $this->bdd->prepare("DELETE FROM `joueur` WHERE ID_JOUEUR = :id");
-       $result->bindParam(":id", $this->id);
-       $req = $result->execute();
-       echo "joueur supprimé";
-   }
-
-   public function varDump($variable)
-   {
-       echo '<pre style=background-color:#333' . ';width:50%' . ';color:#fff>' . print_r($variable, true) . '</pre>';
-   }
+       $result->bindParam(":id", $id);
+       
+       $result->execute();
+    }
 }
 
 
