@@ -1,6 +1,6 @@
 <?php
 
-require_once ("class.php");
+require_once ("classConnect.php");
 /**
 * nouvelle class player qui est la fille de la classe mère "Connect"
 */
@@ -26,7 +26,7 @@ class Player extends Connect
     }
 
     /**
-    * sort tout les matricule 
+    * sort tout les id 
     * @param string
     */
     public function checkInBdd(string $post){
@@ -99,7 +99,7 @@ class Player extends Connect
     * @param string
     * @return array
     */
-    public static function poster( $snom, $sprenom, $spays){
+    public  function poster( $snom, $sprenom, $spays){
         $sql = "SELECT * FROM `joueur` 
                 INNER JOIN pays 
                 on joueur.ID_PAYS = pays.ID_PAYS 
@@ -109,8 +109,8 @@ class Player extends Connect
                 OR pays.ACRO_PAYS like :pays 
                 OR pays.NOM_PAYS like :pays)";
 
-        $player1 = new Player();
-        $result  = $player1->bdd->prepare($sql);
+        
+        $result  = $this->bdd->prepare($sql);
 
        //concaténation pour le LIKE)
        $snom="%".$snom."%";

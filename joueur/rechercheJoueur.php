@@ -16,9 +16,10 @@
     $spays = filter_input(INPUT_POST,'spays');
 
     
-    //appel de notre fichier class
-   
-    require_once (ROOT . DS ."classes/classPlayer.php");
+    //appel de notre fichier classPlayer
+    
+    require_once (dirname(ROOT) . DS ."classes/classPlayer.php");
+    require_once (dirname(ROOT) . DS ."lib/functions.php");
 
     //etablissement d'une nouvelle connexion
     $dbh = new Connect;
@@ -34,17 +35,9 @@
 
         if($_POST['sub'] == 2){
             $poster = new Player(); 
-            if(count($_POST) > 0 && $_POST['sub'] == 2){
-                  $playerx=Player::poster( $_POST["snom"],$_POST["sprenom"],$_POST["spays"]);
-                  $id=$playerx[0]["ID_JOUEUR"];
-                  echo $id;
-            }
+            
         } 
 
-        if($_POST["delete"] == 3 ){
-            $delete = new Player();
-            $delete->delete($id);
-        }
     }
 
     function varDump($variable){
@@ -79,12 +72,6 @@
 
     <h2>recherchez un joueur</h2>
     <form  method="post">
-        <input type="hidden" name="id" value="<?php 
-            if(isset($id)) {
-                echo $id;
-            }
-            varDump($playerx);
-        ?>">
         <label for="nom">nom</label>
         <input type="text" name="snom">
         <label for="prenom">prenom</label>
@@ -92,6 +79,9 @@
         <label for="pays">pays</label>
         <input type="text" name="spays">  
         <button type="submit" name="sub" value="2">envoyer</button>
+        <?php
+            echo display($poster);
+        ?>
     </form>
     <a href="contrat.php">créer un contrat</a>
 </body>
