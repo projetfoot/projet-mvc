@@ -10,8 +10,9 @@
     $date = filter_input(INPUT_POST,'date');
 
     require_once (dirname(ROOT) . DS ."classes/classPlayer.php");
-    require_once (dirname(ROOT) . DS ."lib/functions.php");
-    
+    require_once (dirname(ROOT) . DS ."lib/function.php");
+
+
     if(count($_POST) > 0 ){
         if($_POST['sub'] == 1) {
             //ajout des paramètres dans le constructeur
