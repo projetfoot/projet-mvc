@@ -9,8 +9,8 @@
     $prenom = filter_input(INPUT_POST,'prenom');
     $date = filter_input(INPUT_POST,'date');
 
-    require_once (dirname(ROOT) . DS ."classes/classPlayer.php");
-    require_once (dirname(ROOT) . DS ."lib/function.php");
+    require_once (dirname(ROOT) . DS ."classes/Player.php");
+    require_once (dirname(ROOT) . DS ."lib2/functions.php");
 
 
     if(count($_POST) > 0 ){
@@ -33,7 +33,6 @@
 </head>
 <body>
     <h1>inscrivez un joueur dans la bdd.</h1>
-    <p> Si l'id entrée correspond a un joueur veillez réentrer tout les champs avec le champs que vous voulez changer </p>
     <form  method='post'>
         <label for="pays">pays</label>
         <input type="text" name="pays" >

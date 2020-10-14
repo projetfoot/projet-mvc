@@ -1,12 +1,12 @@
 <?php
 
-require_once ("classConnect.php");
+require_once ("Connect.php");
 /**
 * nouvelle class player qui est la fille de la classe mère "Connect"
 */
 class Player extends Connect
 {
-    private string $id = '';
+    private  $id = '';
     private $country = '';
     private $name= '';
     private $surname = '';
@@ -65,8 +65,9 @@ class Player extends Connect
             NOM_JOUEUR = :nom, 
             PRENOM_JOUEUR = :prenom  
             WHERE NOM_JOUEUR = :nom
-            AND PRENOM_JOUEUR = :prenom "
-    );
+            AND PRENOM_JOUEUR = :prenom 
+            ");
+
         $result->bindParam(':codepays', $this->country);
         $result->bindParam(':nom', $this->name);
         $result->bindParam(':prenom', $this->surname);
@@ -81,8 +82,8 @@ class Player extends Connect
             "SELECT * FROM `joueur`
             WHERE NOM_JOUEUR = :nom
             AND 
-            PRENOM_JOUEUR = :prenom"
-        );
+            PRENOM_JOUEUR = :prenom
+            ");
         $result->bindParam(':nom', $this->name);
         $result->bindParam(':prenom', $this->surname);
         $result->execute(); 
@@ -131,11 +132,18 @@ class Player extends Connect
    /**
     * supprime le joueur et son contrat
     */
-   public function delete($id){
-       $result = $this->bdd->prepare("DELETE FROM `joueur` WHERE ID_JOUEUR = :id");
+   public static  function delete($id){
+       $player = new Player();
+       $result = $player->bdd->prepare("DELETE FROM `joueur` WHERE ID_JOUEUR = :id");
        $result->bindParam(":id", $id);
        
        $result->execute();
+       $this->__destruct();
+    }
+
+    public function __destruct()
+    {
+  //  echo "The " . $this->type . " is being deleted" . "<br>"; 
     }
 }
 

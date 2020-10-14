@@ -7,24 +7,24 @@
     $snom = filter_input(INPUT_POST,'snom');
     $sprenom = filter_input(INPUT_POST,'sprenom');
     $spays = filter_input(INPUT_POST,'spays');
-
+    $poster = null;
     
     //appel de notre fichier classPlayer
-    require_once (dirname(ROOT) . DS ."classes/classPlayer.php");
-    require_once (dirname(ROOT) . DS ."libs/functions.php");
+    require_once (dirname(ROOT) . DS ."classes/Player.php");
+    require_once (dirname(ROOT) . DS ."lib2/functions.php");
 
     //etablissement d'une nouvelle connexion
-    $dbh = new Connect;
+    $dbh = new Connect();
 
     //si la page compte au moin un post la condition s'execute
+    
     if(count($_POST) > 0){
         
-
-        if($_POST['sub'] == 2){
+        if(isset($_POST['sub'])){
             $poster = new Player(); 
         } 
 
-        if($_POST["delete"] == 1 ){
+        if(isset($_POST["delete"])){
             $delete = new Player();
         }
     }
@@ -46,12 +46,22 @@
         <input type="text" name="sprenom">
         <label for="pays">pays</label>
         <input type="text" name="spays">  
+  
         <button type="submit" name="sub" value="2">envoyer</button>
-        <?php
-            //affichage des recherche
-             display($poster);
-        ?>
+
+        <form method="post">
+            <?php 
+                //affichage des recherche
+                display($poster);
+                //suppression joueur 
+                suppr($delete);
+            ?>
+            <button name="delete" value=1 >supprimer</button>
+        </form>
     </form>
+
+
+    
     <br>
     <a href="inscriptionUpdate.php">inscire ou modifier un joueur</a>
 </body>
