@@ -64,6 +64,6 @@
 
     
     <br>
-    <a href="inscriptionUpdate.php">inscire ou modifier un joueur</a>
+    <a href="inscription.php">inscire ou modifier un joueur</a>
 </body>
 </html>

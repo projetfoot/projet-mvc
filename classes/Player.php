@@ -7,16 +7,16 @@ require_once ("Connect.php");
 class Player extends Connect
 {
     private  $id = '';
-    private $country = '';
-    private $name= '';
-    private $surname = '';
-    private $birth = '';
+    private int $country = -1;
+    private string $name= '';
+    private string $surname = '';
+    private string $birth = '';
 
     /**
     * creation d'un constructor pour mon nouveau joueur 
     * @param string
     */
-    public function __construct(string $c='', string $n='', string $s='', string $b=''){
+    public function __construct(int $c=-1, string $n='', string $s='', string $b=''){
         $this->country=$c;
         $this->name=$n;
         $this->surname=$s;
@@ -25,7 +25,7 @@ class Player extends Connect
     }
 
     /**
-    * sort tout les id 
+    * sort tout les nom et prenom 
     * @param string
     */
     public function checkInBdd(string $post){
