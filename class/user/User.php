@@ -1,5 +1,7 @@
 <?php
 
+require_once ROOT .'class/model/UserModel.php'; 
+
 class User
 {
     private string $id;
@@ -110,5 +112,32 @@ class User
         $this->lawLevel = $lawLevel;
 
         return $this;
+    }
+
+    /**
+     * Data send by user
+     */
+    public function edit (string $name,string $mail, int $id)
+    {   
+        $this->setName($name);
+        $this->setEmail($mail);
+        
+        (new UserModel())->update($this, intval($id));
+        (new Session())->set('alertUser', 'success', 'Modification enregistré');
+        Tool::redirectTo('/user/profil.php');
+    }
+
+    /**
+     * 
+     */
+    public function ifEmailExistWhenUserEdit(string $mail, string $currentUserData) : void
+    {
+        $emailExist = (new UserModel())->findOneBy('user', 'email_user', $mail);
+        
+        if($emailExist && $emailExist['email_user'] !== $currentUserData)
+        {
+            (new Session())->set('alertUser', 'error', 'Cet adresse mail est déjà utilisé');
+            Tool::redirectTo('/user/profil.php');
+        }
     }
 }

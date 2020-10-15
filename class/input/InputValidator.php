@@ -11,11 +11,6 @@ class InputValidator
      */
     public function name(string $name = null) : bool
     {
-        if($name === null)
-        {
-            return '' ;
-        } 
-
         $regex = "/^[a-z]*$/i";
 
         if(!preg_match( $regex, $name) )
