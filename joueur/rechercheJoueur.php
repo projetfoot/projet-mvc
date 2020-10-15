@@ -8,6 +8,7 @@
     $sprenom = filter_input(INPUT_POST,'sprenom');
     $spays = filter_input(INPUT_POST,'spays');
     $poster = null;
+    $delete = null;
     
     //appel de notre fichier classPlayer
     require_once (dirname(ROOT) . DS ."classes/Player.php");

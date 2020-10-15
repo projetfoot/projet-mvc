@@ -138,7 +138,7 @@ class Player extends Connect
        $result->bindParam(":id", $id);
        
        $result->execute();
-       $this->__destruct();
+       $player->__destruct();
     }
 
     public function __destruct()
