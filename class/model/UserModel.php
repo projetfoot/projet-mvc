@@ -1,6 +1,7 @@
 <?php
 
 require_once ROOT .'class/model/Model.php'; 
+require_once ROOT .'class/user/User.php'; 
 
 class UserModel extends Model
 {   
@@ -16,13 +17,41 @@ class UserModel extends Model
             ";
         
         $query = $this->pdo->prepare($sql);
-        var_dump($user);
 
         return $query->execute([
             'nom_user' => $user->getName(),
             'email_user' => $user->getEmail(),
             'password_user' => $user->getPassword(),
             'niveau_de_droit' => $user->getLawLevel(),
+        ]);
+    }
+
+    public function findName($id) : array
+    {
+        $sql = "SELECT nom_user FROM user WHERE id_user = :id_user";
+
+        $query = $this->pdo->prepare($sql);
+
+        $query->execute([
+            ":id_user" => $id
+        ]);
+
+        return $query->fetch();
+    }
+
+    public function update(User $user, int $id) : bool
+    {
+        $sql = "UPDATE user
+                SET nom_user = :nom_user,
+                    email_user = :email_user
+                WHERE id_user = :id_user";
+
+        $query = $this->pdo->prepare($sql);
+        
+        return $query->execute([
+            ':nom_user' => $user->getName(),
+            ':email_user' => $user->getEmail(),
+            ':id_user' => $id
         ]);
     }
 }

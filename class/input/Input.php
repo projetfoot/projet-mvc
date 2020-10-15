@@ -43,15 +43,20 @@ class Input
      */
     private function clean()
     {   
-        $name = $this->post['mail'];
+        $name = $this->post['name'] ?? null;
+        $mail = $this->post['mail'];
         $pass = $this->post['password'];
-        $confirmPass = $this->post['confirmPass'];
+        $confirmPass = $this->post['confirmPass'] ?? null ;
 
         $error = [];
-        
-        $error['mail'] = filter_var($name, FILTER_VALIDATE_EMAIL);
+        $error['name'] = $this->validator->name($name);
+        $error['mail'] = $this->validator->email($mail);// filter_var($name, FILTER_VALIDATE_EMAIL);
         $error['password'] = $this->validator->password($pass);
-        $error['equal'] = $pass === $confirmPass ? true : false;
+
+        if(isset($confirmPass))
+        {
+            $error['equal'] = $pass === $confirmPass ? true : false;
+        }
 
         return $error;
     }
@@ -64,6 +69,7 @@ class Input
         $arrays = [ $this->cleans, $this->emptys ];
         $error = [];
 
+
         foreach ($arrays as $key => $array) {
 
             foreach ($array as $key => $value) {
@@ -74,6 +80,7 @@ class Input
                 }
             }
         }
+
         return $error;
     }
 

@@ -25,18 +25,25 @@ class Session
 
     /**
      * Example : 'file','error','Error while file creation'
+     * @param mixed $value
      */
-    public function set(string $section, string $type , string $message) : void
-    {
-        $_SESSION[$section][$type] = $message;
+    public function set(string $section , string $type = null, $value) : void
+    {   
+        if($type === null)
+        {
+            $_SESSION[$section] = $value;
+            return;
+        }
+
+        $_SESSION[$section][$type] = $value;
     }
 
      /**
      * Get $key in current session
      */
-    public function get(string $key)
+    public function get(string $section)
     {
-        return $_SESSION[$key];
+        return $_SESSION[$section];
     }
 
     public function display($section) : void

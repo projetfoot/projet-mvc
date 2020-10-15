@@ -32,7 +32,7 @@ abstract class Model
      * @param mixed $value target field in table
      * @return false|array
      */
-    public function findOneBy (string $tableName, string $field , $value) 
+    public function findOneBy (string $tableName, string $field , $value) : array
     {
         $sql =" SELECT * FROM $tableName WHERE $field = :$field";
 
@@ -42,6 +42,6 @@ abstract class Model
             ":$field" => $value
         ]);
 
-        return $query->fetch();
+        return $query->fetch() ?: [];
     }
 }

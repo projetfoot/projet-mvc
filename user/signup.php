@@ -44,6 +44,7 @@
     <input type="password" name="password" placeholder="Entrez un mot de passe">
     <input type="password" name="confirmPass" placeholder="Confirmer mot de passe">
     <button type="submit">Enregistrer</button>
+    <a href="/user/signin.php">Se connecter</a>
 </form>
 <a href=""></a>
 
