@@ -30,10 +30,12 @@ class Player extends Connect
     */
     public function checkInBdd(string $post){
         $result = $this->bdd->prepare(
-            "SELECT NOM_JOUEUR, PRENOM_JOUEUR FROM joueur"
+            "SELECT * FROM joueur WHERE ID_JOUEUR = :id"
         );
-        $result->execute();
-        $req = $result->fetchAll;
+        $result->execute([
+            "id" => $post
+        ]);
+        $req = $result->fetchAll();
         return $req;
     }
 
@@ -58,7 +60,7 @@ class Player extends Connect
     /**
     * update un joueur si le id est deja prit(il faut tout repréciser)
     */
-    private function update(){  
+    public function update(){  
         $result = $this->bdd->prepare(
             "UPDATE `joueur` 
             SET ID_PAYS = :codepays, 
@@ -110,7 +112,6 @@ class Player extends Connect
                 OR pays.ACRO_PAYS like :pays 
                 OR pays.NOM_PAYS like :pays)";
 
-        
         $result  = $this->bdd->prepare($sql);
 
        //concaténation pour le LIKE)
@@ -133,18 +134,15 @@ class Player extends Connect
     * supprime le joueur et son contrat
     */
    public static  function delete($id){
+
        $player = new Player();
        $result = $player->bdd->prepare("DELETE FROM `joueur` WHERE ID_JOUEUR = :id");
        $result->bindParam(":id", $id);
        
-       $result->execute();
-       $player->__destruct();
+      return  $result->execute();
+
     }
 
-    public function __destruct()
-    {
-  //  echo "The " . $this->type . " is being deleted" . "<br>"; 
-    }
 }
 
 

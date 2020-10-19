@@ -14,6 +14,7 @@
     require_once (dirname(ROOT) . DS ."classes/Pays.php");
 
 
+    //si ce qui est entrée dans nom et prenom n'est pas un chiffre alors on insert
     if( regexNom($nom) && regexPrenom($prenom) == true){
         checkInputInscription($idpays,$nom,$prenom,$date);
     }
@@ -26,6 +27,7 @@
 
         echo "n'entrez pas de chiffre dans le nom et le prenom";
      }
+
 ?>
 
 <DOCTYPE html>
@@ -36,27 +38,30 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>inscrivez un joueur dans la bdd.</h1>
+    <h1>inscrivez </h1>
     <form  method='post'>
         <select name="pays">
         <?php
+            
             $listePays = $pays->readPays();
 
             //recup les valeurs de readPays pour la liste des pays
             foreach($listePays as $key => $value){
                 echo "<option value=" . $value["ID_PAYS"]. ">". $value["NOM_PAYS"] . "</option>";
             }
+            
         ?>
         </select>
-        <label for="nom">nom</label>
-        <input type="text" name="nom" required>
-        <label for="prenom">prenom</label>
-        <input type="text" name="prenom" required> 
+        <label for="nom"></label>
+        <input type="text" name="nom"  placeholder="nom..." value="<?=showNameWhenUpdate()?>" required>
+        <label for="prenom"></label>
+        <input type="text" name="prenom" value="<?=showSurnameWhenUpdate()?>" required > 
         <label for="date">date de naissance</label>
-        <input type="date" name="date" required> 
+        <input type="date" name="date" placeholder="date" value="<?=showDateWhenUpdate()?>" required> 
         <button type="submit" name="sub" value="1">envoyer</button>
         <br>
         <a href="rechercheJoueur.php">retour sur la recherche</a>
+        <br>
     </form>
 
 </body>

@@ -1,14 +1,14 @@
 <?php 
     define('ROOT', __DIR__);
     define('DS', DIRECTORY_SEPARATOR);
-    
+
 
     //varible pour la recherche 
     $snom = filter_input(INPUT_POST,'snom');
     $sprenom = filter_input(INPUT_POST,'sprenom');
     $spays = filter_input(INPUT_POST,'spays');
     $poster = null;
-    $delete = null;
+    $update = null;
     
     //appel de notre fichier classPlayer
     require_once (dirname(ROOT) . DS ."classes/Player.php");
@@ -28,6 +28,14 @@
         if(isset($_POST["delete"])){
             $delete = new Player();
         }
+
+        if(isset($_POST["update"])){
+            $update = new Player();
+        }
+    } 
+
+    if(isset($_SESSION['suppr'])){
+        echo $_SESSION['suppr'];
     }
 ?>
 <!DOCTYPE html>
@@ -47,23 +55,44 @@
         <input type="text" name="sprenom">
         <label for="pays">pays</label>
         <input type="text" name="spays">  
-  
         <button type="submit" name="sub" value="2">envoyer</button>
+        <a href="inscription.php">inscrire un joueur</a>
 
-        <form method="post">
-            <?php 
-                //affichage des recherche
-                display($poster);
-                //suppression joueur 
-                suppr($delete);
-            ?>
-            <button name="delete" value=1 >supprimer</button>
-        </form>
     </form>
 
-
     
-    <br>
-    <a href="inscription.php">inscire ou modifier un joueur</a>
+    <?php 
+        if($poster){
+            
+            //affichage des recherche
+            $value = display($poster);
+            
+            //suppression joueur 
+            //suppr($delete);
+            
+            //update du joueur
+            change($update);
+
+        }
+
+        if(!isset($value)){
+
+            return;
+        }   
+
+        for($i=0; $i<count($value) ;$i++){
+
+            echo $value[$i];
+        }
+            
+
+        if(!isset($value["ID_JOUEUR"])){
+
+        return;
+        }
+
+    ?>
+    
 </body>
 </html>
+
