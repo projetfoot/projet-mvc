@@ -44,4 +44,29 @@ abstract class Model
 
         return $query->fetch() ?: [];
     }
+
+    /**
+     * Find all occurence in atable
+     */
+    public function findAll(string $tableName)
+    {
+        $sql = "SELECT * FROM $tableName";
+
+        $query = $this->pdo->prepare($sql);
+
+        $query->execute();
+
+        return $query->fetchAll() ?? [];
+    }
+
+    public function deleteOneBy(string $tableName, string $field , $value) : bool
+    {
+        $sql = "DELETE FROM $tableName WHERE $field = :$field";
+        
+        $query = $this->pdo->prepare($sql);
+
+        return $query->execute([
+            ":$field" => $value
+        ]);
+}
 }

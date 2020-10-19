@@ -4,7 +4,6 @@
     require_once ROOT .'class/model/UserModel.php'; 
     require_once ROOT .'class/user/User.php'; 
 
-
     if(isset($_POST) && !empty($_POST))
     {
        $input = new Input($_POST, 'alertUser');
@@ -22,7 +21,6 @@
                 $user->setName($_POST['name']);
                 $user->setEmail($_POST['mail']);
                 $user->setPassword($_POST['password']);
-                
 
                 $userModel->create($user) 
                 ?  $session->set('alertUser', 'success', "Le compte {$user->getEmail()} a bien été crée")

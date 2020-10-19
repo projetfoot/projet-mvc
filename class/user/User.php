@@ -115,7 +115,7 @@ class User
     }
 
     /**
-     * Data send by user
+     *Edit user
      */
     public function edit (string $name,string $mail, int $id)
     {   
@@ -128,7 +128,7 @@ class User
     }
 
     /**
-     * 
+     * Unauthorize user email edition if email already exist
      */
     public function ifEmailExistWhenUserEdit(string $mail, string $currentUserData) : void
     {
@@ -139,5 +139,112 @@ class User
             (new Session())->set('alertUser', 'error', 'Cet adresse mail est déjà utilisé');
             Tool::redirectTo('/user/profil.php');
         }
+    }
+
+    /**
+     * Get error
+     */
+    public function getError(array $post, string $currentPassword)
+    {
+        $inputValidator = new InputValidator();
+        $inputMessage = new InputMessage();
+        $session =  new Session();
+        $tool = new Tool();
+        $inputPass = $post['editPassword'] ?? '';
+        $inputNewPass = $post['newPassword'] ?? '';
+        $confirmNewPass = $post['confirmNewPassword'] ?? '';
+
+        $error = [];
+
+        // var_dump($inputPass, $currentPassword);
+
+        if( empty($inputPass) )
+        {
+            $session->set('alertUserPass', 'error', $inputMessage->password());
+            $error[] = false;
+        }
+
+        if( !password_verify($inputPass, $currentPassword) )
+        {   
+            $session->set('alertUserPass', 'error', $inputMessage->badPassword());
+            $error[] = false;
+        }
+
+        if( empty($inputNewPass) )
+        {
+            $session->set('alertUserPass', 'error', $inputMessage->newPassword());
+            $error[] = false;
+        }
+
+        if( !$inputValidator->password($inputNewPass) )
+        {   
+            $session->set('alertUserPass', 'error', $inputMessage->newPasswordVerify());
+            $error[] = false;
+        }
+
+      
+        if( $inputNewPass !== $confirmNewPass )
+        {   
+            $session->set('alertUserPass', 'error', $inputMessage->equal());
+            $error[] = false;
+        }
+        
+        return $error;
+    }
+
+    /**
+     * Edit user pass
+     */
+    public function editPass(array $post, string $currentPassword)
+    {
+        $session = new Session();
+        $error = $this->getError($post, $currentPassword);
+        $id = $session->get('_userStart');
+        $userRepo = new UserModel();
+        $inputMessage = new InputMessage();
+
+        if(!in_array(false, $error))
+        {
+            $this->setPassword($post['newPassword']);
+
+            if( $userRepo->updatePass($this, $id))
+            {
+                $session->set('alertUserPass','success', $inputMessage->passwordChanged());
+            }else{
+                $session->set('alertUserPass','error', 'désolé une erreur est survenue' );
+            }
+        }
+    }
+
+    /**
+     * Display all users
+     */
+    public function displayAll()
+    {
+        $usersRepo = (new UserModel())->findAll('user');
+
+        foreach ($usersRepo as $key => $user) {
+
+            $lawLevel = intval($user['niveau_de_droit']);
+            $law = $this->lawLevel($lawLevel);
+
+            displayEachUserCard($user, $law);
+        }
+    }
+
+    private function lawLevel(int $level) 
+    {   
+        $law = null;
+
+        if($level ===  0)
+        {
+            $law =  "Basic";
+        }
+
+        if($level ===  65535 )
+        {
+            $law =  "Super-Admin";
+        }
+        return $law;
     }
 }
