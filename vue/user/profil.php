@@ -1,6 +1,6 @@
 <?php
 
-require_once ROOT . 'lib/functions.php';
+require_once dirname(dirname(__DIR__)) . '/lib/functions.php';
 require_once ROOT .'class/input/Input.php'; 
 require_once ROOT .'class/model/UserModel.php'; 
 require_once ROOT .'class/session/Session.php'; 
@@ -38,8 +38,6 @@ if(isset($_POST['mail']) && !empty($_POST['mail']))
 }
 ?>
 
-<<<<<<< HEAD:vue/user/profil.php
->>>>>>> Groupe-1:user/profil.php
 <?php require_once ROOT .'partials/header.php';?>
 
 <h1>Profil</h1>

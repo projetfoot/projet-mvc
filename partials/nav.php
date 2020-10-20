@@ -1,9 +1,9 @@
 <nav>
-    <a href="/user/home.php">Contrat</a>
-    <a href="/user/home.php">Home</a>
-    <a href="/user/profil.php">Profil</a>
-    <a href="/user/role/show.php">Utilisateur</a>
-    <form action="/user/signout.php" method="post"><button type="submit">Deconnexion</button></form>
+    <a href="/vue/user/home.php">Contrat</a>
+    <a href="/vue/user/home.php">Home</a>
+    <a href="/vue/user/profil.php">Profil</a>
+    <a href="/vue/user/role/show.php">Utilisateur</a>
+    <form action="/vue//user/signout.php" method="post"><button type="submit">Deconnexion</button></form>
 </nav>
 <nav>
 

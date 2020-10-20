@@ -1,5 +1,5 @@
 <?php
-    require_once '../lib/functions.php';
+    require_once dirname(dirname(__DIR__)) . '/lib/functions.php';
     require_once ROOT .'class/Tool.php'; 
     require_once ROOT .'class/input/Input.php'; 
     require_once ROOT .'class/model/UserModel.php'; 
@@ -39,7 +39,7 @@
     <input type="email" name="mail" placeholder="@Email">
     <input type="password" name="password" placeholder="Entrez un mot de passe">
     <button type="submit">Se connecter</button>
-    <a href="/user/signup.php">Creer un compter</a>
+    <a href="/vue/user/signup.php">Creer un compter</a>
 </form>
 
 <?php (new Session())->display('alertUser') ?>

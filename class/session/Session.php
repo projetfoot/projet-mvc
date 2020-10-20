@@ -67,8 +67,8 @@ class Session
     {
         if( !isset($_SESSION['_userStart']) )
         {
-            header('Location:/user/signin.php');
+            header('Location:/vue/user/signin.php');
             die();
         }
-} 
+    } 
 }

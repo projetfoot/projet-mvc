@@ -1,5 +1,5 @@
 <?php 
-    require_once '../lib/functions.php';
+    require_once dirname(dirname(__DIR__)) . '/lib/functions.php';
     require_once ROOT .'class/session/Session.php'; 
     require_once ROOT .'class/model/UserModel.php'; 
 
