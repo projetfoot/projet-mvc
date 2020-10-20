@@ -11,7 +11,7 @@
     $update = null;
     
     //appel de notre fichier classPlayer
-    require_once (dirname(ROOT) . DS ."class/Player.php");
+    require_once (dirname(ROOT) . DS ."class/player/Player.php");
     require_once (dirname(ROOT) . DS ."joueurLib/functions.php");
 
     //etablissement d'une nouvelle connexion

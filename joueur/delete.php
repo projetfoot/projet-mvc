@@ -1,10 +1,9 @@
 <?php 
 
-var_dump($_POST["id"]);
 
 $delete = null;
 
-require_once ("../class/Player.php");
+require_once ("../class/player/Player.php");
 require_once ("../joueurLib/functions.php");
 
 $delete = new Player;
