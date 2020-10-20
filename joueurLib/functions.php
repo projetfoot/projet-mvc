@@ -1,7 +1,7 @@
 <?php
 
-require_once ("../classes/Player.php");
-require_once ("../classes/Pays.php");
+require_once ("../class/Player.php");
+require_once ("../class/Pays.php");
 
 $player = new Player();
 $pays = new Pays();

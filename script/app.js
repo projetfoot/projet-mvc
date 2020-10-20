@@ -3,12 +3,12 @@ console.log(del);
 
 /**
  * supprime ou non selon le choix de l'utilisateur
+ * 
  * si @false rien est supprimé sinon on supprime
  */
 function delOrNo(){
-    var i = 0
-
-    do(del[i].addEventListener("click", function(e){
+    
+    del[0].addEventListener("click", function(e){
         var conf = confirm('voulez vous supprimer ce joueur ?');
         
         if(conf == false){
@@ -17,11 +17,7 @@ function delOrNo(){
         } else {
             alert ('joueur supprimé')
         }
-    })) 
-    
-    while (i > del.length){
-    
-    }
+    }) 
 }
 
 delOrNo();
