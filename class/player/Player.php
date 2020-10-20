@@ -1,6 +1,8 @@
 <?php
 
-require_once ("Connect.php");
+
+require_once dirname(__DIR__) . "/model/Connect.php";
+
 /**
 * nouvelle class player qui est la fille de la classe mère "Connect"
 */

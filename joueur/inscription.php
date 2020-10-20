@@ -9,9 +9,9 @@
     $prenom = filter_input(INPUT_POST,'prenom');
     $date = filter_input(INPUT_POST,'date');
 
-    require_once (dirname(ROOT) . DS ."class/Player.php");
+    require_once (dirname(ROOT) . DS ."class/player/Player.php");
     require_once (dirname(ROOT) . DS ."joueurLib/functions.php");
-    require_once (dirname(ROOT) . DS ."class/Pays.php");
+    require_once (dirname(ROOT) . DS ."class/pays/Pays.php");
 
 
     //si ce qui est entrée dans nom et prenom n'est pas un chiffre alors on insert
@@ -27,7 +27,6 @@
 
         echo "n'entrez pas de chiffre dans le nom et le prenom";
      }
-     var_dump($_POST);
 ?>
 
 <DOCTYPE html>
