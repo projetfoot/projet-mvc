@@ -14,8 +14,7 @@
     require_once (dirname(ROOT) . DS ."class/player/Player.php");
     require_once (dirname(ROOT) . DS ."joueurLib/functions.php");
 
-    //etablissement d'une nouvelle connexion
-    $dbh = new Connect();
+    
 
     //si la page compte au moin un post la condition s'execute
     
