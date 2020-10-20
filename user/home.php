@@ -8,6 +8,7 @@ $session = new Session();
 $userModel = new UserModel();
 
 $id = $session->get('_userStart');
+$id ?? $session->ifNotConnected();
 $name = $userModel->findName($id)[0];
 
 require_once ROOT .'partials/header.php'; 

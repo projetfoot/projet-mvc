@@ -12,7 +12,7 @@ class User
 
     private string $password;
 
-    private int $lawLevel = 0;
+    private int $lawLevel = 1;
 
     /**
      * Get the value of id
@@ -226,25 +226,48 @@ class User
         foreach ($usersRepo as $key => $user) {
 
             $lawLevel = intval($user['niveau_de_droit']);
-            $law = $this->lawLevel($lawLevel);
+            $law = $this->displaylawLevel($lawLevel);
 
             displayEachUserCard($user, $law);
         }
     }
 
-    private function lawLevel(int $level) 
+    private function displaylawLevel(int $level) 
     {   
         $law = null;
 
-        if($level ===  0)
+
+        if($level ===  1)
         {
-            $law =  "Basic";
+            $law =  "Lecture";
+        }
+
+        if($level ===  2)
+        {
+            $law =  "Update/Insert";
+        }
+        
+        if($level ===  3)
+        {
+            $law =  "Delete";
         }
 
         if($level ===  65535 )
         {
             $law =  "Super-Admin";
         }
-        return $law;
+
+        return $law ?? 'Inconnu';
+    }
+
+    public function updateLawLevel(int $id, int $level)
+    {
+        var_dump($level);
+        $this->setLawLevel($level);
+        $update = (new UserModel())->updateLawLevel($this, $id,$level);
+
+        $update 
+        ? (new Session())->set('alertUserRolesEdition', 'success', 'Niveau de droit modifié')
+        : (new Session())->set('alertUserRolesEdition', 'error', 'Une erreur est survenue lors de la modification des droits');
     }
 }

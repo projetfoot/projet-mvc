@@ -8,6 +8,7 @@ require_once ROOT .'class/Tool.php';
 
 $session = new Session();
 $id = $session->get('_userStart');
+$id ?? $session->ifNotConnected();
 
 $userModel = new UserModel();
 $data = $userModel->findOneBy('user','id_user',$id);
@@ -37,7 +38,6 @@ if(isset($_POST['mail']) && !empty($_POST['mail']))
 }
 ?>
 
-<?php require_once '../lib/functions.php'; ?>
 <?php require_once ROOT .'partials/header.php';?>
 
 <h1>Profil</h1>

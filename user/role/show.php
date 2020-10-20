@@ -20,4 +20,5 @@ $user = new User();
 <h1>Gérer les utilisateurs</h1>
 
 <?php $user->displayAll(); ?>
+
 <?php (new Session())->display('alertUserRoles') ?>
