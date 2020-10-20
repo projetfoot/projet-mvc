@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../lib/functions.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/lib/functions.php';
 require_once ROOT .'class/input/Input.php'; 
 require_once ROOT .'class/model/UserModel.php'; 
 require_once ROOT .'class/session/Session.php'; 

@@ -1,5 +1,5 @@
 <?php
-    require_once '../lib/functions.php';
+    require_once dirname(dirname(__DIR__)) . '/lib/functions.php';
     require_once ROOT .'class/input/Input.php'; 
     require_once ROOT .'class/model/UserModel.php'; 
     require_once ROOT .'class/user/User.php'; 
@@ -42,7 +42,7 @@
     <input type="password" name="password" placeholder="Entrez un mot de passe">
     <input type="password" name="confirmPass" placeholder="Confirmer mot de passe">
     <button type="submit">Enregistrer</button>
-    <a href="/user/signin.php">Se connecter</a>
+    <a href="/vue/user/signin.php">Se connecter</a>
 </form>
 <a href=""></a>
 
