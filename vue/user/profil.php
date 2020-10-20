@@ -1,6 +1,6 @@
 <?php
 
-require_once '../lib/functions.php';
+require_once ROOT . 'lib/functions.php';
 require_once ROOT .'class/input/Input.php'; 
 require_once ROOT .'class/model/UserModel.php'; 
 require_once ROOT .'class/session/Session.php'; 
@@ -35,7 +35,6 @@ if(isset($_POST) && !empty($_POST))
 ?>
 
 
-<?php require_once '../lib/functions.php'; ?>
 <?php require_once ROOT .'partials/header.php';?>
 
 <h1>Profil</h1>

@@ -1,8 +1,8 @@
 <?php
 
-require ROOT . "/modele/Database.php"; 
+require ROOT . "/class/model/Model.php"; 
 
-class Contrat extends Database{
+class Contrat extends Model {
 
     private $idContrat;
     private $idJoueur;
