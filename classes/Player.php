@@ -1,22 +1,22 @@
 <?php
 
-require_once ("classConnect.php");
+require_once ("Connect.php");
 /**
 * nouvelle class player qui est la fille de la classe mère "Connect"
 */
 class Player extends Connect
 {
-    private string $id = '';
-    private $country = '';
-    private $name= '';
-    private $surname = '';
-    private $birth = '';
+    private  $id = '';
+    private int $country = -1;
+    private string $name= '';
+    private string $surname = '';
+    private string $birth = '';
 
     /**
     * creation d'un constructor pour mon nouveau joueur 
     * @param string
     */
-    public function __construct(string $c='', string $n='', string $s='', string $b=''){
+    public function __construct(int $c=-1, string $n='', string $s='', string $b=''){
         $this->country=$c;
         $this->name=$n;
         $this->surname=$s;
@@ -25,15 +25,17 @@ class Player extends Connect
     }
 
     /**
-    * sort tout les id 
+    * sort tout les nom et prenom 
     * @param string
     */
     public function checkInBdd(string $post){
         $result = $this->bdd->prepare(
-            "SELECT NOM_JOUEUR, PRENOM_JOUEUR FROM joueur"
+            "SELECT * FROM joueur WHERE ID_JOUEUR = :id"
         );
-        $result->execute();
-        $req = $result->fetchAll;
+        $result->execute([
+            "id" => $post
+        ]);
+        $req = $result->fetchAll();
         return $req;
     }
 
@@ -58,15 +60,16 @@ class Player extends Connect
     /**
     * update un joueur si le id est deja prit(il faut tout repréciser)
     */
-    private function update(){  
+    public function update(){  
         $result = $this->bdd->prepare(
             "UPDATE `joueur` 
             SET ID_PAYS = :codepays, 
             NOM_JOUEUR = :nom, 
             PRENOM_JOUEUR = :prenom  
             WHERE NOM_JOUEUR = :nom
-            AND PRENOM_JOUEUR = :prenom "
-    );
+            AND PRENOM_JOUEUR = :prenom 
+            ");
+
         $result->bindParam(':codepays', $this->country);
         $result->bindParam(':nom', $this->name);
         $result->bindParam(':prenom', $this->surname);
@@ -81,8 +84,8 @@ class Player extends Connect
             "SELECT * FROM `joueur`
             WHERE NOM_JOUEUR = :nom
             AND 
-            PRENOM_JOUEUR = :prenom"
-        );
+            PRENOM_JOUEUR = :prenom
+            ");
         $result->bindParam(':nom', $this->name);
         $result->bindParam(':prenom', $this->surname);
         $result->execute(); 
@@ -109,7 +112,6 @@ class Player extends Connect
                 OR pays.ACRO_PAYS like :pays 
                 OR pays.NOM_PAYS like :pays)";
 
-        
         $result  = $this->bdd->prepare($sql);
 
        //concaténation pour le LIKE)
@@ -130,13 +132,19 @@ class Player extends Connect
 
    /**
     * supprime le joueur et son contrat
+    *
+    * @param string 
     */
-   public function delete($id){
-       $result = $this->bdd->prepare("DELETE FROM `joueur` WHERE ID_JOUEUR = :id");
+   public static  function delete($id){
+
+       $player = new Player();
+       $result = $player->bdd->prepare("DELETE FROM `joueur` WHERE ID_JOUEUR = :id");
        $result->bindParam(":id", $id);
        
-       $result->execute();
+      return  $result->execute();
+
     }
+
 }
 
 
