@@ -132,6 +132,8 @@ class Player extends Connect
 
    /**
     * supprime le joueur et son contrat
+    *
+    * @param string 
     */
    public static  function delete($id){
 

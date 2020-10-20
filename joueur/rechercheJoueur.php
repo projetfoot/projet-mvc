@@ -22,14 +22,17 @@
     if(count($_POST) > 0){
         
         if(isset($_POST['sub'])){
+
             $poster = new Player(); 
         } 
 
         if(isset($_POST["delete"])){
+
             $delete = new Player();
         }
 
         if(isset($_POST["update"])){
+
             $update = new Player();
         }
     } 
@@ -40,59 +43,30 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        
+        <h2>recherchez un joueur</h2>
+        <form  method="post">
+            <label for="nom">nom</label>
+            <input type="text" name="snom">
+            <label for="prenom">prenom</label>
+            <input type="text" name="sprenom">
+            <label for="pays">pays</label>
+            <input type="text" name="spays">  
+            <button type="submit" name="sub" value="2">envoyer</button>
+            <a href="inscription.php">inscrire un joueur</a>
+        </form>
+        <div class="form">
+            <!-- ajoute un bouton supprimer et ajouter pour tout les joueurs trouvé -->
+            <?php updateAndDeleteForAll($poster,$update)?>
+        </div>
     
-    <h2>recherchez un joueur</h2>
-    <form  method="post">
-        <label for="nom">nom</label>
-        <input type="text" name="snom">
-        <label for="prenom">prenom</label>
-        <input type="text" name="sprenom">
-        <label for="pays">pays</label>
-        <input type="text" name="spays">  
-        <button type="submit" name="sub" value="2">envoyer</button>
-        <a href="inscription.php">inscrire un joueur</a>
-
-    </form>
-
-    
-    <?php 
-        if($poster){
-            
-            //affichage des recherche
-            $value = display($poster);
-            
-            //suppression joueur 
-            //suppr($delete);
-            
-            //update du joueur
-            change($update);
-
-        }
-
-        if(!isset($value)){
-
-            return;
-        }   
-
-        for($i=0; $i<count($value) ;$i++){
-
-            echo $value[$i];
-        }
-            
-
-        if(!isset($value["ID_JOUEUR"])){
-
-        return;
-        }
-
-    ?>
-    
-</body>
+    <script src="../script/app.js"></script>   
+    </body>
 </html>
 

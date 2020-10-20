@@ -27,7 +27,7 @@
 
         echo "n'entrez pas de chiffre dans le nom et le prenom";
      }
-
+     var_dump($_POST);
 ?>
 
 <DOCTYPE html>
@@ -38,7 +38,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>inscrivez </h1>
+    <h1>inscrivez<?php displayUpdate() ?></h1>
     <form  method='post'>
         <select name="pays">
         <?php

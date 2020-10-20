@@ -13,7 +13,6 @@ $delete = new Player;
 $id = $_POST["id"];
 $req = Player::delete($id);
 
-var_dump($req);
 if($req){
 
     session_start();

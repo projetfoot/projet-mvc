@@ -24,9 +24,9 @@ function display($player){
                         "<p> <strong>nom: </strong>" . $values["NOM_JOUEUR"] . "<br>" .
                         "<strong>prenom: </strong> " . $values["PRENOM_JOUEUR"] . "<br>" . 
                         "<strong>pays: </strong> " . $values["ACRO_PAYS"] .  "</p>" .
-                        "<form action='delete.php' method='post' name='suppr'>
+                        "<form action='delete.php' method='post' name='suppr' >
                             <input type='hidden' name='id' value='".$values['ID_JOUEUR']."'>
-                            <button name='delete' value=1 >supprimer</button>
+                            <button name='delete' value=1 id='suppr' >supprimer</button>
                         </form> ".
                         "<form action='inscription.php?id=".$values["ID_JOUEUR"]."' method='post'> 
                             <button name='update' value=1>modifier</button>
@@ -87,6 +87,13 @@ function regexPrenom($inputPrenom){
 }
 
 
+/**
+ * verifie si out les champs sont remplis
+ * 
+ * @param int
+ * 
+ * @param string
+ */
 function checkInputInscription(int $idpays, string $nom, string $prenom, string $date){
 
     if(count($_POST) > 0 && !empty($idpays) && !empty($nom) && !empty($prenom) && !empty($date)){
@@ -105,6 +112,12 @@ function checkInputInscription(int $idpays, string $nom, string $prenom, string 
 }
  
 
+/**
+ * si un post est emis et que le button update est activé:
+ * on appel la method update
+ * 
+ * @param object 
+ */
 function change($player){
     
     if(count($_POST) > 0 && isset($_POST["update"])){
@@ -113,6 +126,10 @@ function change($player){
     }
 }
 
+
+/**
+ * quand le bouton update est active il renvoie sur la page d'inscription et modification avec le nom préremplie
+ */
 function showNameWhenUpdate(){
   
         if(count($_POST) > 0 && isset($_POST["update"]) == 1 ){
@@ -127,6 +144,9 @@ function showNameWhenUpdate(){
 
 }
 
+/**
+ * quand le bouton update est active il renvoie sur la page d'inscription et modification avec le prénom préremplie
+ */
 function showSurnameWhenUpdate(){
 
     if(count($_POST) > 0 && isset($_POST["update"]) == 1 ){
@@ -141,6 +161,9 @@ function showSurnameWhenUpdate(){
 }
 
 
+/**
+ * quand le bouton update est active il renvoie sur la page d'inscription et modification avec la date de naissance préremplie
+ */
 function showDateWhenUpdate(){
 
     if(count($_POST) > 0 && isset($_POST["update"]) == 1 ){
@@ -151,5 +174,54 @@ function showDateWhenUpdate(){
         foreach($req as $key => $value){
             echo $value["DATE_NAISSANCE_JOUEUR"];
         }
+    }
+}
+
+
+/**
+ * ajoute un bouton modifier et supprimer a tout les joueurs trouvé 
+ * 
+ * @param object
+ */
+function updateAndDeleteForAll($poster,$update){
+
+    if($poster){
+            
+        //affichage des recherche
+        $value = display($poster);
+        
+        //suppression joueur 
+        //suppr($delete);
+        
+        //update du joueur
+        change($update);
+
+    }
+
+    if(!isset($value)){
+
+        return;
+    }   
+
+    for($i=0; $i<count($value) ;$i++){
+
+        echo $value[$i];
+    }
+        
+
+    if(!isset($value["ID_JOUEUR"])){
+
+    return;
+    }
+}
+
+/**
+ * si le bouton update est activé on rajoute "et modifiez" dans la page
+ */
+function displayUpdate(){
+
+    if(isset($_POST["update"]) == 1 ){
+
+        echo " et modifiez";
     }
 }
