@@ -1,6 +1,6 @@
 <?php
 
-require ROOT . "/class/model/Model.php"; 
+require dirname(__DIR__) . "/model/Model.php"; 
 
 class Contrat extends Model {
 
@@ -25,6 +25,7 @@ class Contrat extends Model {
             "ID_CLUB" => $idClub, 
             "NOM_CONTRAT" => $nomContrat
             ]);
+            var_dump($exec);
             return $exec;
     }
 

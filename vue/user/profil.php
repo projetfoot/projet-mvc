@@ -47,7 +47,7 @@ if(isset($_POST['mail']) && !empty($_POST['mail']))
     <input type="email" name="mail" value="<?= $data['email_user'] ?>" placeholder="Email">
     <input type="password" name="password" placeholder="Entrez un mot de passe">
     <button type="submit">Enregistrer</button>
-    <a href="/user/profil.php?editPass=true">Modifier mot de passe</a>
+    <a href="/vue/user/profil.php?editPass=true">Modifier mot de passe</a>
 </form>
 
 <?php (new Session())->display('alertUser') ?>
@@ -66,3 +66,5 @@ if(isset($_POST['mail']) && !empty($_POST['mail']))
     <?php (new Session())->display('alertUserPass') ?>
 
 <?php endif ?>
+
+<?php require_once ROOT .'partials/footer.php';?>

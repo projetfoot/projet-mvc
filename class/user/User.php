@@ -156,8 +156,6 @@ class User
 
         $error = [];
 
-        // var_dump($inputPass, $currentPassword);
-
         if( empty($inputPass) )
         {
             $session->set('alertUserPass', 'error', $inputMessage->password());
@@ -262,7 +260,6 @@ class User
 
     public function updateLawLevel(int $id, int $level)
     {
-        var_dump($level);
         $this->setLawLevel($level);
         $update = (new UserModel())->updateLawLevel($this, $id,$level);
 

@@ -22,7 +22,7 @@
             {
                $session->set('alertUser', 'succes', "Vous êtes connectés {$data['nom_user']}");
                $session->set('_userStart', null, intval($data['id_user']));
-               Tool::redirectTo('/user/home.php');
+               Tool::redirectTo('/vue/user/home.php');
             }else{
                $session->set('alertUser', 'error', "Veuillez vérifier vos identifiants");
             }
