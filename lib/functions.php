@@ -1,6 +1,6 @@
 <?php
 
-define('ROOT', dirname(__DIR__) . '/');
+dirname(__DIR__) . '/';
 require_once (dirname(__DIR__) . "/class/player/Player.php");
 require_once (dirname(__DIR__) . "/class/pays/Pays.php");
 
