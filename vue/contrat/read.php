@@ -1,7 +1,6 @@
 <?php 
 
-define("ROOT", dirname(__DIR__));
-require ROOT . "/modele/Contrat.php"; 
+require_once dirname(dirname(__DIR__)) . "/class/contrat/Contrat.php"; 
 
 $idContrat = null; 
 
@@ -21,14 +20,7 @@ $nomContrat = $data['NOM_CONTRAT'];
   
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
+<?php require_once dirname(dirname(__DIR__)) .'/partials/header.php'; ?> 
 
 <div class="container">
     <div class="span10 offset1">
@@ -71,6 +63,5 @@ $nomContrat = $data['NOM_CONTRAT'];
 
     </div>
 </div>
-<!-- /container -->
-</body>
-</html>
+
+<?php require_once dirname(dirname(__DIR__)) .'/partials/footer.php'; ?>

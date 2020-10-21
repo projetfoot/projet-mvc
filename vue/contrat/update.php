@@ -1,7 +1,7 @@
 <?php 
     session_start();
-     define("ROOT", dirname(__DIR__));
-     require ROOT . "/modele/Contrat.php"; 
+    
+    require_once dirname(dirname(__DIR__)) . "/class/contrat/Contrat.php"; 
       
     $idContrat = null; 
     
@@ -45,18 +45,9 @@
          header("Location: index.php"); 
     } 
 
-     
-     ?>
+?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Contrat</title>
-        <link href="./css/bootstrap.min.css" rel="stylesheet">       
-    </head>
-
-    <body>
+<?php require_once dirname(dirname(__DIR__)) .'/partials/header.php'; ?> 
 
 <div class="container">
     <div class="row">
@@ -111,7 +102,7 @@
             echo $_SESSION["success_update"];
         } 
     ?>
+
 </div>
+<?php require_once dirname(dirname(__DIR__)) .'/partials/footer.php'; ?>
         
-</body>
-</html>

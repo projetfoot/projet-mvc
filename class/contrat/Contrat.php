@@ -1,6 +1,6 @@
 <?php
 
-require ROOT . "/class/model/Model.php"; 
+require dirname(dirname(__DIR__)) . "/class/model/Model.php"; 
 
 class Contrat extends Model {
 

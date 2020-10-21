@@ -11,11 +11,11 @@ $id = $session->get('_userStart');
 $id ?? $session->ifNotConnected();
 $name = $userModel->findName($id)[0];
 
-require_once ROOT .'partials/header.php'; 
 ?>
 
-<h1>Accueil</h1>
+<?php require_once ROOT .'partials/header.php'; ?> 
 
+<h1>Accueil</h1>
 
 <h2>Bienvenue <span style="text-decoration:underline"><?= ucfirst($name) ?></span></h2>
 

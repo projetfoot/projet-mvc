@@ -1,11 +1,8 @@
  <?php 
 
-    define("ROOT", dirname(__DIR__));
-    require ROOT . "/modele/Contrat.php"; 
+    require_once dirname(dirname(__DIR__)) . "/class/contrat/Contrat.php"; 
     
-    //var_dump(ROOT . "/modele/database.php");
-    
-    if($_SERVER["REQUEST_METHOD"]== "POST" && !empty($_POST)){ //on initialise nos messages d'erreurs; 
+    if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)){ //on initialise nos messages d'erreurs; 
         $contrat = new Contrat();
         $idJoueurError = ''; $idClubError=''; $nomContratError='';  // on recupère nos valeurs 
         $idJoueur = htmlentities(trim($_POST['idJoueur']));
@@ -45,43 +42,22 @@
         }else if (!preg_match("/^[a-zA-Z ]*$/",$nomContrat)) { 
 
             $nomContratError = "Only letters and white space allowed"; 
+            $valid = false; 
         }
-        var_dump($valid);
 
         if($valid){
             $add = $contrat->add($idJoueur, $idClub, $nomContrat);
+
             if ($add){
                 $result = 'Contrat crée';
+            }else{
+                $result = 'Une erreur est survenue';
             }
         }
-        // si les données sont présentes et bonnes, on se connecte à la base 
-        /*if ($valid) { $pdo = Database::connect(); $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $sql = "INSERT INTO contrat (ID_JOUEUR,ID_CLUB,NOM_CONTRAT) values(:ID_JOUEUR, :ID_CLUB, :NOM_CONTRAT)";
-            $q = $pdo->prepare($sql);
-            $exec = $q->execute([
-                "ID_JOUEUR" => $idJoueur,
-                "ID_CLUB" => $idClub, 
-                "NOM_CONTRAT" => $nomContrat
-                ]);
-            var_dump($exec);
-            die();
-            Database::disconnect();
-            header("Location: index.php");}
-            */
-        
     }
 ?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Contrat</title>
-        <link href="./css/bootstrap.min.css" rel="stylesheet">       
-    </head>
-
-    <body>
+<?php require_once dirname(dirname(__DIR__)) .'/partials/header.php'; ?> 
 
 <div class="container">
     <div class="row">
@@ -131,6 +107,5 @@
     </form>
         <?= $result ?? "" ?>
 </div>
-        
-</body>
-</html>
+
+<?php require_once dirname(dirname(__DIR__)) .'/partials/footer.php'; ?>
