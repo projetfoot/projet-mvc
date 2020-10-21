@@ -54,4 +54,32 @@ class UserModel extends Model
             ':id_user' => $id
         ]);
     }
+
+    public function updatePass(User $user, int $id) : bool
+    {
+        $sql = "UPDATE user
+                SET password_user = :password_user
+                WHERE id_user = :id_user";
+
+        $query = $this->pdo->prepare($sql);
+        
+        return $query->execute([
+            ':password_user' => $user->getPassword(),
+            ':id_user' => $id
+        ]);
+    }
+
+    public function updateLawLevel(User $user, int $id) : bool
+    {
+        $sql = "UPDATE user
+                SET niveau_de_droit = :niveau_de_droit
+                WHERE id_user = :id_user";
+
+        $query = $this->pdo->prepare($sql);
+        
+        return $query->execute([
+            ':niveau_de_droit' => $user->getLawLevel(),
+            ':id_user' => $id
+        ]);
+    }
 }

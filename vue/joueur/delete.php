@@ -3,8 +3,9 @@
 
 $delete = null;
 
-require_once ("../class/player/Player.php");
-require_once ("../joueurLib/functions.php");
+
+require_once ("../../class/player/Player.php");
+require_once ("../../lib/functions.php");
 
 $delete = new Player;
 
@@ -12,7 +13,8 @@ $delete = new Player;
 $id = $_POST["id"];
 $req = Player::delete($id);
 
-if($req){
+if($req)
+{
 
     session_start();
     $_SESSION['suppr'] = "suppresion effectuée";

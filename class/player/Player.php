@@ -1,12 +1,11 @@
 <?php
 
-
-require_once dirname(__DIR__) . "/model/Connect.php";
+require_once dirname(__DIR__) . "/model/Model.php";
 
 /**
 * nouvelle class player qui est la fille de la classe mère "Connect"
 */
-class Player extends Connect
+class Player extends Model
 {
     private  $id = '';
     private int $country = -1;
@@ -18,7 +17,9 @@ class Player extends Connect
     * creation d'un constructor pour mon nouveau joueur 
     * @param string
     */
-    public function __construct(int $c=-1, string $n='', string $s='', string $b=''){
+    public function __construct(int $c=-1, string $n='', string $s='', string $b='')
+    {
+
         $this->country=$c;
         $this->name=$n;
         $this->surname=$s;
@@ -30,8 +31,10 @@ class Player extends Connect
     * sort tout les nom et prenom 
     * @param string
     */
-    public function checkInBdd(string $post){
-        $result = $this->bdd->prepare(
+    public function checkInBdd(string $post)
+    {
+
+        $result = $this->pdo->prepare(
             "SELECT * FROM joueur WHERE ID_JOUEUR = :id"
         );
         $result->execute([
@@ -45,8 +48,10 @@ class Player extends Connect
     * insere les données du formulaire dans la bdd
     * @return bool
     */
-    private function insert(){   
-        $result = $this->bdd->prepare(
+    private function insert()
+    {   
+
+        $result = $this->pdo->prepare(
             "INSERT INTO `joueur` (ID_PAYS, NOM_JOUEUR, PRENOM_JOUEUR, DATE_NAISSANCE_JOUEUR) 
             VALUES ( :country, :name, :surname, :birth) "
         );
@@ -62,8 +67,10 @@ class Player extends Connect
     /**
     * update un joueur si le id est deja prit(il faut tout repréciser)
     */
-    public function update(){  
-        $result = $this->bdd->prepare(
+    public function update()
+    {  
+
+        $result = $this->pdo->prepare(
             "UPDATE `joueur` 
             SET ID_PAYS = :codepays, 
             NOM_JOUEUR = :nom, 
@@ -81,8 +88,10 @@ class Player extends Connect
     /**
     * en fonction du matricule rentré cette fonction renvoie soit vers l'insert si aucun matricule soit vers l'update
     */
-    public function write(){
-        $result = $this->bdd->prepare(
+    public function write()
+    {
+
+        $result = $this->pdo->prepare(
             "SELECT * FROM `joueur`
             WHERE NOM_JOUEUR = :nom
             AND 
@@ -104,7 +113,9 @@ class Player extends Connect
     * @param string
     * @return array
     */
-    public  function poster( $snom, $sprenom, $spays){
+    public  function poster( $snom, $sprenom, $spays)
+    {
+
         $sql = "SELECT * FROM `joueur` 
                 INNER JOIN pays 
                 on joueur.ID_PAYS = pays.ID_PAYS 
@@ -114,7 +125,7 @@ class Player extends Connect
                 OR pays.ACRO_PAYS like :pays 
                 OR pays.NOM_PAYS like :pays)";
 
-        $result  = $this->bdd->prepare($sql);
+        $result  = $this->pdo->prepare($sql);
 
        //concaténation pour le LIKE)
        $snom="%".$snom."%";
@@ -137,10 +148,11 @@ class Player extends Connect
     *
     * @param string 
     */
-   public static  function delete($id){
+   public static  function delete($id)
+   {
 
        $player = new Player();
-       $result = $player->bdd->prepare("DELETE FROM `joueur` WHERE ID_JOUEUR = :id");
+       $result = $player->pdo->prepare("DELETE FROM `joueur` WHERE ID_JOUEUR = :id");
        $result->bindParam(":id", $id);
        
       return  $result->execute();

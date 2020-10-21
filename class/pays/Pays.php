@@ -1,6 +1,7 @@
 <?php 
 
-class Pays extends Connect{
+class Pays extends Model
+{
     private int $idPays;
     private string $acroPays;
     private string $nomPays;
@@ -8,7 +9,7 @@ class Pays extends Connect{
     
     public function readPays()
     {
-        $resultat = $this->bdd->prepare('SELECT * FROM `pays` ORDER BY `pays`.`ACRO_PAYS` ASC ');
+        $resultat = $this->pdo->prepare('SELECT * FROM `pays` ORDER BY `pays`.`ACRO_PAYS` ASC ');
         $resultat->execute();
         $elements = $resultat->fetchAll();
         

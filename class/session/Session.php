@@ -59,4 +59,16 @@ class Session
 
         $_SESSION[$section] = null;
     }
+
+    /**
+     * If user not connected return him to signin page 
+     */
+    public function ifNotConnected() : void
+    {
+        if( !isset($_SESSION['_userStart']) )
+        {
+            header('Location:/vue/user/signin.php');
+            die();
+        }
+    } 
 }

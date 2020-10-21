@@ -6,5 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-<?php require_once ROOT .'partials/nav.php'; ?> 
+<?php require_once dirname(__DIR__)  . '/partials/nav.php'; ?> 
+
 
