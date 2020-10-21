@@ -16,7 +16,9 @@
     require_once (dirname(dirname(ROOT)) . DS ."class/pays/Pays.php");
 
     //si ce qui est entrée dans nom et prenom n'est pas un chiffre alors on insert
-    if( regexNom($nom) && regexPrenom($prenom) == true){
+    if( regexNom($nom) && regexPrenom($prenom) == true)
+    {
+        
         checkInputInscription($idpays,$nom,$prenom,$date);
     }
 

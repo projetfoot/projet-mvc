@@ -1,8 +1,7 @@
 <?php 
 
-define("ROOT", dirname(__DIR__));
-require ROOT . "/modele/Contrat.php"; 
- 
+    require dirname(dirname(__DIR__)) . '/class/contrat/Contrat.php'; 
+
     $idContrat=0; 
     if(!empty($_GET['idContrat'])){ 
         $idContrat=$_REQUEST['idContrat']; 
@@ -11,6 +10,6 @@ require ROOT . "/modele/Contrat.php";
     $contrat->delete($idContrat);
     session_start();
     $_SESSION["success"] = "Contrat Supprimé ! ";
-    header("Location: index.php");
+    header("Location:index.php");
 
  

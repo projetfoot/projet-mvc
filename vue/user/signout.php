@@ -2,5 +2,5 @@
 
 session_start();
 session_unset();
-header('Location:/user/signin.php');
+header('Location:/vue/user/signin.php');
 die();

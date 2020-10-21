@@ -13,7 +13,8 @@ $delete = new Player;
 $id = $_POST["id"];
 $req = Player::delete($id);
 
-if($req){
+if($req)
+{
 
     session_start();
     $_SESSION['suppr'] = "suppresion effectuée";

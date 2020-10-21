@@ -6,7 +6,8 @@ console.log(del);
  * 
  * si @false rien est supprimé sinon on supprime
  */
- function delOrNo(del){
+ function delOrNo(del)
+ {
      
     for(var i = 0; i < del.length; i++){
 

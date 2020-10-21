@@ -84,7 +84,9 @@ function display($player){
 * 
 * @return bool si ça correspond
 */
-function regexNom($inputNom){
+function regexNom($inputNom)
+{
+
     $subject = $inputNom;
     
     $regex = "/[a-zA-Z]/";
@@ -108,7 +110,9 @@ function regexNom($inputNom){
 * 
 * @return bool si ça correspond
 */
-function regexPrenom($inputPrenom){
+function regexPrenom($inputPrenom)
+{
+
     $subject = $inputPrenom;
     
     $regex = "/[a-zA-Z]/";
@@ -133,7 +137,8 @@ function regexPrenom($inputPrenom){
  * 
  * @param string
  */
-function checkInputInscription(int $idpays, string $nom, string $prenom, string $date){
+function checkInputInscription(int $idpays, string $nom, string $prenom, string $date)
+{
 
     if(count($_POST) > 0 && !empty($idpays) && !empty($nom) && !empty($prenom) && !empty($date)){
 
@@ -145,6 +150,7 @@ function checkInputInscription(int $idpays, string $nom, string $prenom, string 
             $bdd->write(); 
         }
     } else {
+
         echo "remplissez tout les champs";
         
     }
@@ -157,7 +163,8 @@ function checkInputInscription(int $idpays, string $nom, string $prenom, string 
  * 
  * @param object 
  */
-function change($player){
+function change($player)
+{
     
     if(count($_POST) > 0 && isset($_POST["update"])){
 
@@ -169,7 +176,8 @@ function change($player){
 /**
  * quand le bouton update est active il renvoie sur la page d'inscription et modification avec le nom préremplie
  */
-function showNameWhenUpdate(){
+function showNameWhenUpdate()
+{
   
         if(count($_POST) > 0 && isset($_POST["update"]) == 1 ){
 
@@ -186,7 +194,8 @@ function showNameWhenUpdate(){
 /**
  * quand le bouton update est active il renvoie sur la page d'inscription et modification avec le prénom préremplie
  */
-function showSurnameWhenUpdate(){
+function showSurnameWhenUpdate()
+{
 
     if(count($_POST) > 0 && isset($_POST["update"]) == 1 ){
 
@@ -203,7 +212,8 @@ function showSurnameWhenUpdate(){
 /**
  * quand le bouton update est active il renvoie sur la page d'inscription et modification avec la date de naissance préremplie
  */
-function showDateWhenUpdate(){
+function showDateWhenUpdate()
+{
 
     if(count($_POST) > 0 && isset($_POST["update"]) == 1 ){
 
@@ -222,7 +232,8 @@ function showDateWhenUpdate(){
  * 
  * @param object
  */
-function updateAndDeleteForAll($poster,$update){
+function updateAndDeleteForAll($poster,$update)
+{
 
     if($poster){
             
@@ -257,7 +268,8 @@ function updateAndDeleteForAll($poster,$update){
 /**
  * si le bouton update est activé on rajoute "et modifiez" dans la page
  */
-function displayUpdate(){
+function displayUpdate()
+{
 
     if(isset($_POST["update"]) == 1 ){
 

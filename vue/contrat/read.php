@@ -1,7 +1,6 @@
 <?php 
 
-define("ROOT", dirname(__DIR__));
-require ROOT . "/modele/Contrat.php"; 
+require dirname(dirname(__DIR__)) . "/class/contrat/Contrat.php"; 
 
 $idContrat = null; 
 

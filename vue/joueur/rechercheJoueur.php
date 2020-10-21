@@ -19,25 +19,30 @@
 
     //si la page compte au moin un post la condition s'execute
     
-    if(count($_POST) > 0){
+    if(count($_POST) > 0)
+    {
         
-        if(isset($_POST['sub'])){
+        if(isset($_POST['sub']))
+        {
 
             $poster = new Player(); 
         } 
 
-        if(isset($_POST["delete"])){
+        if(isset($_POST["delete"]))
+        {
 
             $delete = new Player();
         }
 
-        if(isset($_POST["update"])){
+        if(isset($_POST["update"]))
+        {
 
             $update = new Player();
         }
     } 
 
-    if(isset($_SESSION['suppr'])){
+    if(isset($_SESSION['suppr']))
+    {
         echo $_SESSION['suppr'];
     }
 ?>

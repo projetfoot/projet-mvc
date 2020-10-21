@@ -1,6 +1,7 @@
 <?php 
 
-class Pays extends Model{
+class Pays extends Model
+{
     private int $idPays;
     private string $acroPays;
     private string $nomPays;

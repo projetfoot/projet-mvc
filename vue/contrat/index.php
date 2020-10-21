@@ -2,24 +2,13 @@
 
 session_start();
 
-define("ROOT", dirname(__DIR__));
-require ROOT . "/modele/Contrat.php"; 
+require dirname(dirname(__DIR__)) . '/class/contrat/Contrat.php'; 
 
 $contrat = new Contrat();
 
 $all = $contrat->showAll();
-var_dump($_POST);
 ?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Crud en php</title>
-         <link href="./css/bootstrap.min.css" rel="stylesheet">  
-    </head>
-
-    <body>
         <div class="container">
             <div class="row">
                 <h2>Gestion des Contrat</h2>
@@ -30,7 +19,6 @@ var_dump($_POST);
                     <input type="text" name="nomContrat"/>
                     <input type ="submit" value="Recherche"/>
                 </form>
-                <br/><br/>
             </div>
             <div class="row">
                 <a href="add.php" class="btn btn-success">Ajouter un contrat</a>

@@ -17,7 +17,9 @@ class Player extends Model
     * creation d'un constructor pour mon nouveau joueur 
     * @param string
     */
-    public function __construct(int $c=-1, string $n='', string $s='', string $b=''){
+    public function __construct(int $c=-1, string $n='', string $s='', string $b='')
+    {
+
         $this->country=$c;
         $this->name=$n;
         $this->surname=$s;
@@ -29,7 +31,9 @@ class Player extends Model
     * sort tout les nom et prenom 
     * @param string
     */
-    public function checkInBdd(string $post){
+    public function checkInBdd(string $post)
+    {
+
         $result = $this->pdo->prepare(
             "SELECT * FROM joueur WHERE ID_JOUEUR = :id"
         );
@@ -44,7 +48,9 @@ class Player extends Model
     * insere les données du formulaire dans la bdd
     * @return bool
     */
-    private function insert(){   
+    private function insert()
+    {   
+
         $result = $this->pdo->prepare(
             "INSERT INTO `joueur` (ID_PAYS, NOM_JOUEUR, PRENOM_JOUEUR, DATE_NAISSANCE_JOUEUR) 
             VALUES ( :country, :name, :surname, :birth) "
@@ -61,7 +67,9 @@ class Player extends Model
     /**
     * update un joueur si le id est deja prit(il faut tout repréciser)
     */
-    public function update(){  
+    public function update()
+    {  
+
         $result = $this->pdo->prepare(
             "UPDATE `joueur` 
             SET ID_PAYS = :codepays, 
@@ -80,7 +88,9 @@ class Player extends Model
     /**
     * en fonction du matricule rentré cette fonction renvoie soit vers l'insert si aucun matricule soit vers l'update
     */
-    public function write(){
+    public function write()
+    {
+
         $result = $this->pdo->prepare(
             "SELECT * FROM `joueur`
             WHERE NOM_JOUEUR = :nom
@@ -103,7 +113,9 @@ class Player extends Model
     * @param string
     * @return array
     */
-    public  function poster( $snom, $sprenom, $spays){
+    public  function poster( $snom, $sprenom, $spays)
+    {
+
         $sql = "SELECT * FROM `joueur` 
                 INNER JOIN pays 
                 on joueur.ID_PAYS = pays.ID_PAYS 
@@ -136,7 +148,8 @@ class Player extends Model
     *
     * @param string 
     */
-   public static  function delete($id){
+   public static  function delete($id)
+   {
 
        $player = new Player();
        $result = $player->pdo->prepare("DELETE FROM `joueur` WHERE ID_JOUEUR = :id");
