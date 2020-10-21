@@ -6,18 +6,21 @@ console.log(del);
  * 
  * si @false rien est supprimé sinon on supprime
  */
-function delOrNo(){
-    
-    del[0].addEventListener("click", function(e){
-        var conf = confirm('voulez vous supprimer ce joueur ?');
-        
-        if(conf == false){
-    
-            e.preventDefault();
-        } else {
-            alert ('joueur supprimé')
-        }
-    }) 
-}
+ function delOrNo(del){
+     
+    for(var i = 0; i < del.length; i++){
 
-delOrNo();
+        del[i].addEventListener("click", function(e){
+            var conf = confirm('voulez vous supprimer ce joueur ?');
+            
+            if(conf == false){
+        
+                e.preventDefault();
+            } else {
+                alert ('joueur supprimé')
+            }
+        }) 
+    }
+} 
+
+ delOrNo(del); 

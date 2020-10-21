@@ -3,16 +3,17 @@
     define('ROOT', __DIR__);
     define('DS', DIRECTORY_SEPARATOR);
 
+    
+    
     //creation des varibales filtrées
     $idpays = filter_input(INPUT_POST,'pays', FILTER_VALIDATE_INT);
     $nom = filter_input(INPUT_POST,'nom' );
     $prenom = filter_input(INPUT_POST,'prenom');
     $date = filter_input(INPUT_POST,'date');
 
-    require_once (dirname(ROOT) . DS ."class/player/Player.php");
-    require_once (dirname(ROOT) . DS ."joueurLib/functions.php");
-    require_once (dirname(ROOT) . DS ."class/pays/Pays.php");
-
+    require_once (dirname(dirname(ROOT)) . DS ."class/player/Player.php");
+    require_once (dirname(dirname(ROOT)) . DS ."lib/functions.php");
+    require_once (dirname(dirname(ROOT)) . DS ."class/pays/Pays.php");
 
     //si ce qui est entrée dans nom et prenom n'est pas un chiffre alors on insert
     if( regexNom($nom) && regexPrenom($prenom) == true){
@@ -26,7 +27,8 @@
      else{
 
         echo "n'entrez pas de chiffre dans le nom et le prenom";
-     }
+    }
+
 ?>
 
 <DOCTYPE html>
@@ -54,7 +56,7 @@
         <label for="nom"></label>
         <input type="text" name="nom"  placeholder="nom..." value="<?=showNameWhenUpdate()?>" required>
         <label for="prenom"></label>
-        <input type="text" name="prenom" value="<?=showSurnameWhenUpdate()?>" required > 
+        <input type="text" name="prenom" placeholder="prénom..." value="<?=showSurnameWhenUpdate()?>" required > 
         <label for="date">date de naissance</label>
         <input type="date" name="date" placeholder="date" value="<?=showDateWhenUpdate()?>" required> 
         <button type="submit" name="sub" value="1">envoyer</button>

@@ -11,8 +11,9 @@
     $update = null;
     
     //appel de notre fichier classPlayer
-    require_once (dirname(ROOT) . DS ."class/player/Player.php");
-    require_once (dirname(ROOT) . DS ."joueurLib/functions.php");
+
+    require_once (dirname(dirname(ROOT)) . DS ."class/player/Player.php");
+    require_once (dirname(dirname(ROOT)) . DS ."lib/functions.php");
 
     
 
@@ -65,7 +66,7 @@
             <?php updateAndDeleteForAll($poster,$update)?>
         </div>
     
-    <script src="../script/app.js"></script>   
+    <script src="../../script/app.js"></script>   
     </body>
 </html>
 
