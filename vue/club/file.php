@@ -4,7 +4,7 @@ session_start();
 
 define("ROOT", dirname(__DIR__));
 
-require dirname(ROOT) . "/model/Club.php"; 
+require dirname(ROOT) . "/class/club/Club.php"; 
 
 $club = new Club();
 

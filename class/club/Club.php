@@ -1,6 +1,6 @@
 <?php
 
-require dirname(ROOT) . "/model/Database.php"; 
+require dirname(ROOT) . "/class/club/Database.php"; 
 
 class Club extends Database{
 
