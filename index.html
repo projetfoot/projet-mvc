@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Liste des clubs</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Gestion des Club</h2>
+        </div>
+        <div class="row">
+            <a href="add.php" class="btn btn-success">Ajouter un club</a>
+            <div id="listeClubs"></div>
+
+
+
+            <script>
+
+                var obj = {};
+                var listeClubs = new XMLHttpRequest();
+                listeClubs.open("GET", "vue/club/file.php", true);
+                listeClubs.onreadystatechange = function () {
+                    if (listeClubs.readyState == 4 && listeClubs.status == 200) {
+                        obj = JSON.parse(listeClubs.responseText);
+                        var zoneListe = document.getElementById('listeClubs');
+                        for (element in obj) {
+                            var club = document.createElement('div');
+                            club.append(obj[element]['NOM_CLUB']);
+                            zoneListe.append(club);
+
+                        }
+                    }
+                }
+                listeClubs.send(null);
+
+            </script>
+</body>
+</html>
