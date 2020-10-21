@@ -34,7 +34,6 @@ class Input
 
             !empty($value) ? $error[$key] = true : $error[$key] = false  ;
         }
-        
         return $error;
     }
 
@@ -44,15 +43,15 @@ class Input
     private function clean()
     {   
         $name = $this->post['name'] ?? null;
-        $mail = $this->post['mail'];
-        $pass = $this->post['password'];
+        $mail = $this->post['mail'] ?? null;
+        $pass = $this->post['password'] ?? null;
         $confirmPass = $this->post['confirmPass'] ?? null ;
 
         $error = [];
         $error['name'] = $this->validator->name($name);
         $error['mail'] = $this->validator->email($mail);// filter_var($name, FILTER_VALIDATE_EMAIL);
         $error['password'] = $this->validator->password($pass);
-
+        
         if(isset($confirmPass))
         {
             $error['equal'] = $pass === $confirmPass ? true : false;
@@ -62,7 +61,7 @@ class Input
     }
 
     /**
-     * 
+     * If $_POST has good format and full
      */
     private function ifIsGoodAndFull() : array
     {
@@ -84,6 +83,9 @@ class Input
         return $error;
     }
 
+    /**
+     * return an array with two arrays that may contains errors
+     */
     public function error() : array
     {
         return [

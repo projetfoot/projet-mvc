@@ -12,11 +12,6 @@ $pays2->setNameP($nomPays);
 
 $pays2 -> readPays($idPays);
 
-//$pays2->createOrUpdate();
-//$pays2->deletePays($idPays);
-var_dump($pays2);
-
-
 class Pays{
     private $db;
     private int $idPays;

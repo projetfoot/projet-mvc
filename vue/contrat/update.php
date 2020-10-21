@@ -1,7 +1,7 @@
 <?php 
     session_start();
-     define("ROOT", dirname(__DIR__));
-     require ROOT . "/modele/Contrat.php"; 
+    
+    require dirname(dirname(__DIR__)) . '/class/contrat/Contrat.php'; 
       
     $idContrat = null; 
     
@@ -11,7 +11,6 @@
     } 
         
     $contrat = new Contrat();
-
 
     $data = $contrat->read($idContrat);
 
@@ -45,18 +44,8 @@
          header("Location: index.php"); 
     } 
 
+?>
      
-     ?>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Contrat</title>
-        <link href="./css/bootstrap.min.css" rel="stylesheet">       
-    </head>
-
-    <body>
 
 <div class="container">
     <div class="row">

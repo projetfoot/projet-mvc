@@ -1,8 +1,8 @@
 <?php
 
-require ROOT . "/modele/Database.php"; 
+require dirname(__DIR__) . "/model/Model.php"; 
 
-class Contrat extends Database{
+class Contrat extends Model {
 
     private $idContrat;
     private $idJoueur;
@@ -25,6 +25,7 @@ class Contrat extends Database{
             "ID_CLUB" => $idClub, 
             "NOM_CONTRAT" => $nomContrat
             ]);
+            var_dump($exec);
             return $exec;
     }
 
